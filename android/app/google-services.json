@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "174352203736",
+    "firebase_url": "https://rabbitshipping-fa875-default-rtdb.firebaseio.com",
+    "project_id": "rabbitshipping-fa875",
+    "storage_bucket": "rabbitshipping-fa875.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174352203736:android:ba281416096258eb17bcad",
+        "android_client_info": {
+          "package_name": "onelink.rabit.rabbitshipping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174352203736-nb1p4rp88fe0cclm8ldj6fv2liv1dt7q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLmKj9wWgObu47WV3D4JvuH6jla8Ch-HE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "174352203736-nb1p4rp88fe0cclm8ldj6fv2liv1dt7q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174352203736:android:32124b108ef1990217bcad",
+        "android_client_info": {
+          "package_name": "onelinksoftware.onelink.rabbit.rabbitshipping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174352203736-nti96t9h3hbtli53ft3cn527p6t1o9fq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "onelinksoftware.onelink.rabbit.rabbitshipping",
+            "certificate_hash": "db221161114f89b845eea968cb7e7bd7764ca922"
+          }
+        },
+        {
+          "client_id": "174352203736-nb1p4rp88fe0cclm8ldj6fv2liv1dt7q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLmKj9wWgObu47WV3D4JvuH6jla8Ch-HE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "174352203736-nb1p4rp88fe0cclm8ldj6fv2liv1dt7q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
