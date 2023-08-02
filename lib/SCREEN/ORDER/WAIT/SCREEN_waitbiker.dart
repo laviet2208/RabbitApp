@@ -107,11 +107,11 @@ class _SCREENwaitbikerState extends State<SCREENwaitbiker> {
               if (thisO.status == 'C') {
                 status = 'Đã đón bạn , hành trình bắt đầu! đơn được nhận lúc' + getAllTimeString(thisO.receiveTime);
               }
+
+              if (thisO.status == 'E' || thisO.status == 'F' || thisO.status == 'G' || thisO.status == 'D') {
+                Navigator.push(context, MaterialPageRoute(builder:(context) => SCREENmain()));
+              }
             });
-          } else {
-            if (previous == 'A' || previous == 'B' || previous == 'C') {
-              Navigator.push(context, MaterialPageRoute(builder:(context) => SCREENmain()));
-            }
           }
         }
       }

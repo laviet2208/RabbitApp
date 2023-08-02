@@ -74,18 +74,23 @@ class _PAGEcarlocationsearchgetState extends State<PAGEcarlocationsearchget> {
   }
 
   Future<double> getDistance(double startLatitude, double startLongitude, double endLatitude, double endLongitude) async {
-    final String apiKey = 'AIzaSyBsVQaVVMXw-y3QgvCWwJe02FWkhqP_wRA';
-    final String url = 'https://maps.googleapis.com/maps/api/directions/json?origin=$startLatitude,$startLongitude&destination=$endLatitude,$endLongitude&key=$apiKey';
+    final url = Uri.parse("https://rsapi.goong.io/DistanceMatrix?origins=$startLatitude,$startLongitude&destinations=$endLatitude,$endLongitude&vehicle=bike&api_key=3u7W0CAOa9hi3SLC6RI3JWfBf6k8uZCSUTCHKOLf");
 
-    final response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final distanceInMeters = data['routes'][0]['legs'][0]['distance']['value'];
-      final distanceInKm = distanceInMeters / 1000;
-      print(distanceInKm.toString());
-      return distanceInKm.toDouble();
-    } else {
-      throw Exception('Không thể lấy khoảng cách. Mã lỗi: ${response.statusCode}');
+
+    try {
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        print('đã oke rồi');
+        final distance = data['rows'][0]['elements'][0]['distance']['value'];
+        // Khoảng cách được trả về ở đơn vị mét, bạn có thể chuyển đổi thành đơn vị khác nếu cần.
+        return distance.toDouble()/1000;
+      } else {
+        throw Exception('Lỗi khi gửi yêu cầu tới Goong API: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Lỗi khi xử lý dữ liệu: $e');
     }
   }
 
