@@ -7,7 +7,10 @@ import 'package:rabbitshipping/ITEM/ITEMrestaurant.dart';
 import 'package:rabbitshipping/SCREEN/SHOP/SCREENfoodcart.dart';
 import 'package:rabbitshipping/SCREEN/SHOP/SCREENshopview.dart';
 
+import '../../GENERAL/Product/Product.dart';
+import '../../ITEM/ITEMfood.dart';
 import '../INUSER/SCREEN_MAIN/SCREENmain.dart';
+import 'SCREENfoodview.dart';
 
 class SCREENshopmain extends StatefulWidget {
   const SCREENshopmain({Key? key}) : super(key: key);
@@ -18,6 +21,10 @@ class SCREENshopmain extends StatefulWidget {
 
 class _SCREENshopmainState extends State<SCREENshopmain> {
   List<accountShop> shopList = [];
+  List<Product> monngonmoinoi = [];
+  List<Product> sieusao = [];
+  List<Product> uudai = [];
+
   void getData() {
     final reference = FirebaseDatabase.instance.reference();
     reference.child("RestaurantAccount").onValue.listen((event) {
@@ -32,11 +39,36 @@ class _SCREENshopmainState extends State<SCREENshopmain> {
     });
   }
 
+  void getfoodData() {
+    final reference = FirebaseDatabase.instance.reference();
+    reference.child("RestaurantFood").onValue.listen((event) {
+      monngonmoinoi.clear();
+      sieusao.clear();
+      uudai.clear();
+      final dynamic restaurant = event.snapshot.value;
+      restaurant.forEach((key, value) {
+        Product acc = Product.fromJson(value);
+        if (acc.type == 1) {
+          monngonmoinoi.add(acc);
+        }
+        if (acc.type == 2) {
+          sieusao.add(acc);
+        }
+        if (acc.type == 3) {
+          uudai.add(acc);
+        }
+        setState(() {});
+      });
+
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getData();
+    getfoodData();
   }
 
   @override
@@ -187,38 +219,179 @@ class _SCREENshopmainState extends State<SCREENshopmain> {
                             ),
                           ),
 
+                          Container(height: 20,),
+
+                          Padding(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              child: Text(
+                                'Danh sách nhà hàng',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'arial',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              )
+                          ),
+
                           Container(height: 10,),
 
                           Padding(
                             padding: EdgeInsets.only(left: 10, right: 10),
                             child: Container(
-                                height: screenHeight - 10 - screenHeight/8 + 60,
+                                height: 249,
                                 decoration: BoxDecoration(
 
                                 ),
-                                child: GridView.builder(
-                                  itemCount: shopList.length,
-                                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2, // số phần tử trên mỗi hàng
-                                    mainAxisSpacing: 0, // khoảng cách giữa các hàng
-                                    crossAxisSpacing: 0, // khoảng cách giữa các cột
-                                    childAspectRatio: 0.73, // tỷ lệ chiều rộng và chiều cao
-                                  ),
-                                  itemBuilder: (context, index) {
-                                    return Padding(
-                                      padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-                                      child: InkWell(
-                                        onTap: () {
-                                          Navigator.push(context, MaterialPageRoute(builder:(context) => SCREENshopview(currentShop: shopList[index])));
-                                        },
-                                        child: ITEMrestaurant(currentshop: shopList[index]),
-                                      ),
-                                    );
-                                  },
-                                )
-                            ),
-                          )
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal, // Set the scroll direction to horizontal
+                                itemCount: shopList.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(context, MaterialPageRoute(builder:(context) => SCREENshopview(currentShop: shopList[index])));
+                                      },
+                                      child: ITEMrestaurant(currentshop: shopList[index]),
+                                    ),
+                                  );
+                                },
+                              ),
 
+                            ),
+                          ),
+
+                          Container(height: 20,),
+
+                          Padding(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              child: Text(
+                                'Món ngon mới nổi',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'arial',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              )
+                          ),
+
+                          Container(height: 10,),
+
+                          Padding(
+                            padding: EdgeInsets.only(left: 10, right: 10),
+                            child: Container(
+                              height: 249,
+                              decoration: BoxDecoration(
+
+                              ),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal, // Set the scroll direction to horizontal
+                                itemCount: monngonmoinoi.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(context, MaterialPageRoute(builder:(context) => SCREENfoodview(product: monngonmoinoi[index],)));
+                                      },
+                                      child: ITEMfood(product: monngonmoinoi[index]),
+                                    ),
+                                  );
+                                },
+                              ),
+
+                            ),
+                          ),
+
+
+                          Container(height: 20,),
+
+                          Padding(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              child: Text(
+                                'Siêu sao trong tháng',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'arial',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              )
+                          ),
+
+                          Container(height: 10,),
+
+                          Padding(
+                            padding: EdgeInsets.only(left: 10, right: 10),
+                            child: Container(
+                              height: 249,
+                              decoration: BoxDecoration(
+
+                              ),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal, // Set the scroll direction to horizontal
+                                itemCount: sieusao.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(context, MaterialPageRoute(builder:(context) => SCREENfoodview(product: sieusao[index],)));
+                                      },
+                                      child: ITEMfood(product: sieusao[index]),
+                                    ),
+                                  );
+                                },
+                              ),
+
+                            ),
+                          ),
+
+
+                          Container(height: 20,),
+
+                          Padding(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              child: Text(
+                                'Ngập tràn ưu đãi',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'arial',
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              )
+                          ),
+
+                          Container(height: 10,),
+
+                          Padding(
+                            padding: EdgeInsets.only(left: 10, right: 10),
+                            child: Container(
+                              height: 249,
+                              decoration: BoxDecoration(
+
+                              ),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal, // Set the scroll direction to horizontal
+                                itemCount: uudai.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        Navigator.push(context, MaterialPageRoute(builder:(context) => SCREENfoodview(product: uudai[index],)));
+                                      },
+                                      child: ITEMfood(product: uudai[index]),
+                                    ),
+                                  );
+                                },
+                              ),
+
+                            ),
+                          ),
                         ],
                       ),
                     ),

@@ -2,6 +2,7 @@ import 'package:rabbitshipping/GENERAL/ShopUser/accountShop.dart';
 
 import 'Evaluate.dart';
 
+
 class Product {
   String id;
   String name;
@@ -10,8 +11,11 @@ class Product {
   List<String> imageList;
   List<Evaluate> evaluateList;
   accountShop owner;
+  int type;
+  String openTime;
+  String closedTime;
 
-  Product({required this.id, required this.name, required this.content, required this.owner, required this.cost, required this.evaluateList, required this.imageList});
+  Product({required this.id, required this.name, required this.content, required this.owner, required this.cost, required this.evaluateList, required this.imageList, required this.type, required this.openTime, required this.closedTime});
 
   Map<dynamic, dynamic> toJson() => {
     'id' : id,
@@ -20,7 +24,10 @@ class Product {
     'cost' : cost,
     'owner' : owner.toJson(),
     'evaluateList': evaluateList.map((e) => e.toJson()).toList(),
-    'imageList' : imageList
+    'imageList' : imageList,
+    'type' : type,
+    'openTime' : openTime,
+    'closedTime' : closedTime
   };
 
   factory Product.fromJson(Map<dynamic, dynamic> json) {
@@ -46,7 +53,10 @@ class Product {
         owner: accountShop.fromJson(json['owner']),
         cost: double.parse(json['cost'].toString()),
         evaluateList: evalua,
-        imageList: url
+        imageList: url,
+        type: int.parse(json['type'].toString()),
+        openTime: json['openTime'].toString(),
+        closedTime: json['openTime'].toString()
     );
   }
 }
