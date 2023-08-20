@@ -35,6 +35,25 @@ class _SCREENshopmainState extends State<SCREENshopview> {
     });
   }
 
+  List<int> parseDateString(String dateString) {
+    List<String> parts = dateString.split('/');
+    if (parts.length != 3) {
+      throw Exception("Invalid date format");
+    }
+
+    int day = int.tryParse(parts[0]) ?? 0;
+    int month = int.tryParse(parts[1]) ?? 0;
+    int year = int.tryParse(parts[2]) ?? 0;
+
+    return [day, month, year];
+  }
+
+  String formatTime(int hour, int minute, int second) {
+    String formattedHour = hour.toString().padLeft(2, '0');
+    String formattedMinute = minute.toString().padLeft(2, '0');
+    return '$formattedHour giờ $formattedMinute phút';
+  }
+
   @override
   void initState() {
     // TODO: implement initState
@@ -65,7 +84,7 @@ class _SCREENshopmainState extends State<SCREENshopview> {
                       child: ListView(
                         children: [
                           Container(
-                            height: screenHeight/8 + 60,
+                            height: screenHeight/5 + 60,
                             width: screenWidth,
                             child: Stack(
                               children: <Widget>[
@@ -138,7 +157,7 @@ class _SCREENshopmainState extends State<SCREENshopview> {
 
                                     },
                                     child: Container(
-                                      height: 60,
+                                      height: 110,
                                       width: screenWidth - 20,
                                       decoration: BoxDecoration(
                                         color: Colors.white,
@@ -181,6 +200,32 @@ class _SCREENshopmainState extends State<SCREENshopview> {
                                               ),
                                             ),
                                           ),
+                                          Positioned(
+                                            top: 50,
+                                            left: 50,
+                                            child: Text(
+                                              "Giờ mở cửa : " + formatTime(parseDateString(widget.currentShop.openTime)[0],parseDateString(widget.currentShop.openTime)[1],parseDateString(widget.currentShop.openTime)[2]),
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontFamily: 'arial',
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.green,
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            top: 70,
+                                            left: 50,
+                                            child: Text(
+                                              "Giờ đóng cửa : " + formatTime(parseDateString(widget.currentShop.closeTime)[0],parseDateString(widget.currentShop.closeTime)[1],parseDateString(widget.currentShop.closeTime)[2]),
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontFamily: 'arial',
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.red,
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -195,7 +240,7 @@ class _SCREENshopmainState extends State<SCREENshopview> {
                           Padding(
                             padding: EdgeInsets.only(left: 10, right: 10),
                             child: Container(
-                                height: screenHeight - 10 - screenHeight/8 + 60,
+                                height: screenHeight - 10 - screenHeight/5 - 60,
                                 decoration: BoxDecoration(
 
                                 ),

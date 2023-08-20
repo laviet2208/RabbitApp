@@ -12,10 +12,8 @@ class Product {
   List<Evaluate> evaluateList;
   accountShop owner;
   int type;
-  String openTime;
-  String closedTime;
 
-  Product({required this.id, required this.name, required this.content, required this.owner, required this.cost, required this.evaluateList, required this.imageList, required this.type, required this.openTime, required this.closedTime});
+  Product({required this.id, required this.name, required this.content, required this.owner, required this.cost, required this.evaluateList, required this.imageList, required this.type});
 
   Map<dynamic, dynamic> toJson() => {
     'id' : id,
@@ -26,8 +24,6 @@ class Product {
     'evaluateList': evaluateList.map((e) => e.toJson()).toList(),
     'imageList' : imageList,
     'type' : type,
-    'openTime' : openTime,
-    'closedTime' : closedTime
   };
 
   factory Product.fromJson(Map<dynamic, dynamic> json) {
@@ -55,8 +51,6 @@ class Product {
         evaluateList: evalua,
         imageList: url,
         type: int.parse(json['type'].toString()),
-        openTime: json['openTime'].toString(),
-        closedTime: json['openTime'].toString()
     );
   }
 }

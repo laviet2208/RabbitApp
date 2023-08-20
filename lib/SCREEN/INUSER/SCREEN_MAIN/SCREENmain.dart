@@ -46,7 +46,7 @@ class _SCREENmainState extends State<SCREENmain> {
     switch (selectedIndex) {
       case 0 :
         return PAGEhome();
-      case 3 :
+      case 2 :
         return PAGEaccountinfo();
       default:
         return PAGEcommingsoon();
@@ -173,11 +173,11 @@ class _SCREENmainState extends State<SCREENmain> {
                 icon: Icons.list_alt_outlined,
                 text: ("Hoạt động"),
               ),
-
-              GButton(
-                icon: Icons.account_balance_wallet,
-                text: ("Thanh toán"),
-              ),
+              //
+              // GButton(
+              //   icon: Icons.account_balance_wallet,
+              //   text: ("Thanh toán"),
+              // ),
 
               GButton(
                 icon: Icons.account_circle_sharp,
