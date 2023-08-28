@@ -46,6 +46,7 @@ class _LoginScreenMobiState extends State<SCREENlogin> {
           currentAccount.id = thisacc.id;
           currentAccount.name = thisacc.name;
           currentAccount.cartList = thisacc.cartList;
+          currentAccount.voucherList = thisacc.voucherList;
           currentAccount.locationHis = thisacc.locationHis;
           currentAccount.createTime = thisacc.createTime;
           currentAccount.avatarID = thisacc.avatarID;

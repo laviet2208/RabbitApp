@@ -6,6 +6,7 @@ import 'package:rabbitshipping/GENERAL/Product/Product.dart';
 import 'package:rabbitshipping/GENERAL/Tool/Tool.dart';
 import 'package:rabbitshipping/GENERAL/utils/utils.dart';
 import 'package:rabbitshipping/OTHER/Button/Buttontype1.dart';
+import 'package:rabbitshipping/SCREEN/SHOP/SCREENshopmain.dart';
 import 'package:rabbitshipping/SCREEN/SHOP/SCREENshopview.dart';
 
 class SCREENfoodview extends StatefulWidget {
@@ -170,12 +171,12 @@ class _SCREENfoodviewState extends State<SCREENfoodview> {
                               if (cartList.isEmpty) {
                                 cartList.add(widget.product);
                                 toastMessage('Bạn đã thêm 1 ' + widget.product.name);
-                                Navigator.push(context, MaterialPageRoute(builder:(context) => SCREENshopview(currentShop: widget.product.owner)));
+                                Navigator.push(context, MaterialPageRoute(builder:(context) => SCREENshopmain()));
                               } else {
                                 if (widget.product.owner.id == cartList[0].owner.id) {
                                   cartList.add(widget.product);
                                   toastMessage('Bạn đã thêm 1 ' + widget.product.name);
-                                  Navigator.push(context, MaterialPageRoute(builder:(context) => SCREENshopview(currentShop: widget.product.owner)));
+                                  Navigator.push(context, MaterialPageRoute(builder:(context) => SCREENshopmain()));
                                 } else {
                                   toastMessage('Bạn không thể thêm món từ 2 nhà hàng khác nhau');
                                 }

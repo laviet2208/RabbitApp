@@ -38,12 +38,12 @@ class _SCREENshopmainState extends State<SCREENshopview> {
   List<int> parseDateString(String dateString) {
     List<String> parts = dateString.split('/');
     if (parts.length != 3) {
-      throw Exception("Invalid date format");
+
     }
 
-    int day = int.tryParse(parts[0]) ?? 0;
-    int month = int.tryParse(parts[1]) ?? 0;
-    int year = int.tryParse(parts[2]) ?? 0;
+    int day = int.parse(parts[0]) ?? 0;
+    int month = int.parse(parts[1]) ?? 0;
+    int year = int.parse(parts[2]) ?? 0;
 
     return [day, month, year];
   }
